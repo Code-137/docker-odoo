@@ -1,10 +1,10 @@
 # Docker Odoo
 
-This repository contains the dockerfile to the [Odoo](https://www.odoo.com) using the [odoo-brasil](https://www.github.com/trust-code/odoo-brasil) localisation and the [odoo-apps](https://www.github.com/code-137/odoo-apps).
+This repository contains the dockerfile to the [Odoo](https://www.odoo.com) using the [odoo-brasil](https://www.github.com/trust-code/odoo-brasil) localization and the [odoo-apps](https://www.github.com/code-137/odoo-apps).
 
 ## Requirements
 
-To run this image, will need a Postgres server. An easy way to do this is running the following command:
+To run this image, you will need a Postgres server. An easy way to do this is running the following command:
 
 > docker run --name db -d -e POSTGRES_USER=odoo -e POSTGRES_PASSWORD=odoo -e POSTGRES_DB=postgres postgres:10
 
@@ -35,6 +35,6 @@ An easy way to user this image is running the following command:
 * TIME_CPU=600
 * TIME_REAL=720
 
-Each parameter can be added to the command using -e parameter_name as the following example:
+Each parameter can be added to the command using the -e parameter_name as the following example:
 
 > docker run --name odoo -d -e PG_USER=odoo -e PG_PASSWORD=odoo -e PORT=8050 -e LONGPOLLING_PORT-8052 code137oficial/docker-odoo:13.0
