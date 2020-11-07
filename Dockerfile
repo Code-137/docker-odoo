@@ -1,6 +1,6 @@
 FROM code137oficial/docker-odoo-base:13.0
 
-	##### Repositórios TrustCode #####
+	##### Repositórios TrustCode e Code 137#####
 WORKDIR /opt/odoo
 
 RUN wget https://github.com/odoo/odoo/archive/13.0.zip -O odoo.zip && \
@@ -44,7 +44,7 @@ RUN chown odoo:odoo /opt/odoo/autoupdate && \
 WORKDIR /opt/odoo
 
 ENV PYTHONPATH=$PYTHONPATH:/opt/odoo/odoo
-ENV PG_HOST=localhost
+ENV PG_HOST=172.17.0.1
 ENV PG_PORT=5432
 ENV PG_USER=odoo
 ENV PG_PASSWORD=odoo
@@ -58,7 +58,9 @@ ENV DISABLE_LOGFILE=0
 ENV USE_SPECIFIC_REPO=0
 ENV TIME_CPU=600
 ENV TIME_REAL=720
+ENV DBFILTER=.*
 
+EXPOSE $PORT $LONGPOLLING_PORT
 VOLUME ["/opt/", "/etc/odoo"]
 ENTRYPOINT ["/opt/odoo/entrypoint.sh"]
 CMD ["/usr/bin/supervisord"]
