@@ -6,15 +6,16 @@ This repository contains the dockerfile to the [Odoo](https://www.odoo.com) usin
 
 To run this image, you will need a Postgres server. An easy way to do this is running the following command:
 
-> docker run --name db -d -e POSTGRES_USER=odoo -e POSTGRES_PASSWORD=odoo -e POSTGRES_DB=postgres postgres:10
+> docker run --name postgres -d -e POSTGRES_USER=odoo -e POSTGRES_PASSWORD=odoo -e POSTGRES_DB=postgres -p 5432:5432 postgres:10
+
 
 See [Docker Postgres](https://hub.docker.com/_/postgres/) for more informations.
 
 ## How to use this image
 
-An easy way to user this image is running the following command:
+An easy way to use this image is running the following command:
 
-> docker run --name odoo -d -e PG_USER=odoo -e PG_PASSWORD=odoo code137oficial/docker-odoo:13.0
+> docker run --name odoo -d --net host -e PG_USER=odoo -e PG_PASSWORD=odoo -p 8069:8069 -p 8072:8072 code137oficial/docker-odoo:13.0
 
 
 ### List of available parameters
@@ -34,7 +35,31 @@ An easy way to user this image is running the following command:
 * USE_SPECIFIC_REPO=0
 * TIME_CPU=600
 * TIME_REAL=720
+* DBFILTER=.*
+* DEBUGPY_PORT=8888
 
 Each parameter can be added to the command using the -e parameter_name as the following example:
 
-> docker run --name odoo -d -e PG_USER=odoo -e PG_PASSWORD=odoo -e PORT=8050 -e LONGPOLLING_PORT-8052 code137oficial/docker-odoo:13.0
+> docker run --name odoo -d --net host\\  
+    -e PG_USER=odoo \\  
+    -e PG_PASSWORD=odoo \\  
+    -e PORT=8050 \\  
+    -e LONGPOLLING_PORT=8052 \\  
+    -p 8069:8069 \\  
+    -p 8072:8072 \\  
+    code137oficial/docker-odoo:13.0
+
+## For Developers
+
+Debuging using this container could be possible using the following command:
+
+> docker run --name odoo -d --net host\\  
+    -e PG_USER=odoo \\  
+    -e PG_PASSWORD=odoo \\  
+    -e PORT=8050 \\  
+    -e LONGPOLLING_PORT=8052 \\  
+    -p 8069:8069 \\  
+    -p 8072:8072 \\  
+    -p 8888:8888 \\  
+    code137oficial/docker-odoo:13.0 \\  
+    python3 -m debugpy --listen 0.0.0.0:8888 /opt/odoo/odoo/odoo-bin -c /opt/odoo/odoo.conf
