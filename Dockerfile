@@ -1,6 +1,6 @@
 FROM code137oficial/docker-odoo-base:13.0
 
-	##### Repositórios TrustCode #####
+	##### Repositórios TrustCode e Code 137#####
 WORKDIR /opt/odoo
 
 RUN wget https://github.com/odoo/odoo/archive/13.0.zip -O odoo.zip && \
@@ -24,7 +24,7 @@ RUN unzip -q odoo.zip && rm odoo.zip && mv odoo-13.0 odoo && \
     find . -path "*l10n_*" -delete && \
     rm -R debian && rm -R doc && rm -R setup && cd ..
 
-RUN pip install --no-cache-dir pytrustnfe3 python3-cnab python3-boleto pycnab240 python-sped
+RUN pip install --no-cache-dir pytrustnfe3 python3-cnab python3-boleto pycnab240 python-sped debugpy
 
 	##### Configurações Odoo #####
 
@@ -58,7 +58,10 @@ ENV DISABLE_LOGFILE=0
 ENV USE_SPECIFIC_REPO=0
 ENV TIME_CPU=600
 ENV TIME_REAL=720
+ENV DBFILTER=.*
+ENV DEBUGPY_PORT=8888
 
+EXPOSE $PORT $LONGPOLLING_PORT $DEBUGPY_PORT
 VOLUME ["/opt/", "/etc/odoo"]
 ENTRYPOINT ["/opt/odoo/entrypoint.sh"]
 CMD ["/usr/bin/supervisord"]
