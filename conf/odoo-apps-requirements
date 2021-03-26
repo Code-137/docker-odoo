@@ -1,0 +1,9 @@
+pytrustnfe3
+python3-cnab
+python3-boleto 
+pycnab240 
+python-sped 
+debugpy 
+mercadopago==1.1.1
+coverage
+
