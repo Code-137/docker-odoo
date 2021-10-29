@@ -49,6 +49,16 @@ export PATH="/opt/odoo/odoo:$PATH"
 echo "Iniciando o entrypoint com odoo"
 cd /opt/odoo
 
+# Se existir a chave tenta baixar os repositórios privados
+if [ -f /opt/.ssh/id_rsa ]; then
+  ssh-keyscan github.com >> ~/.ssh/known_hosts
+  ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
+
+  if [ ! -d private-apps ]; then
+    git clone --single-branch -b $ODOO_VERSION $PRIVATE_APPS
+  fi
+fi
+
 # Monta o addons_path
 directories=$(ls -d -1 $PWD/**)
 path=","
