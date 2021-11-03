@@ -1,29 +1,29 @@
-FROM code137oficial/docker-odoo-base:13.0
+FROM code137oficial/docker-odoo-base:15.0
 
 	##### Repositórios TrustCode e Code 137#####
 WORKDIR /opt/odoo
 
-RUN wget https://github.com/odoo/odoo/archive/13.0.zip -O odoo.zip && \
-    wget https://github.com/Trust-Code/odoo-brasil/archive/13.0.zip -O odoo-brasil.zip && \
-    wget https://github.com/Code-137/odoo-apps/archive/13.0.zip -O odoo-apps.zip && \
-    wget https://github.com/oca/server-ux/archive/13.0.zip -O server-ux.zip && \
-    wget https://github.com/oca/reporting-engine/archive/13.0.zip -O reporting-engine.zip && \
-    wget https://github.com/oca/account-financial-reporting/archive/13.0.zip -O account-financial-reporting.zip && \
-    wget https://github.com/oca/mis-builder/archive/13.0.zip -O mis-builder.zip && \
-    wget https://github.com/Trust-Code/helpdesk/archive/13.0.zip -O helpdesk.zip && \
-    wget https://github.com/Trust-Code/trustcode-addons/archive/13.0.zip -O trustcode-addons.zip && \
-    wget https://github.com/trust-code/odoo-themes/archive/13.0.zip -O odoo-themes.zip
+RUN wget https://github.com/odoo/odoo/archive/15.0.zip -O odoo.zip && \
+    wget https://github.com/Trust-Code/odoo-brasil/archive/15.0.zip -O odoo-brasil.zip && \
+    wget https://github.com/Code-137/odoo-apps/archive/15.0.zip -O odoo-apps.zip
+    #wget https://github.com/oca/server-ux/archive/15.0.zip -O server-ux.zip && \
+    #wget https://github.com/oca/reporting-engine/archive/15.0.zip -O reporting-engine.zip && \
+    #wget https://github.com/oca/account-financial-reporting/archive/15.0.zip -O account-financial-reporting.zip && \
+    #wget https://github.com/oca/mis-builder/archive/15.0.zip -O mis-builder.zip && \
+    #wget https://github.com/Trust-Code/helpdesk/archive/15.0.zip -O helpdesk.zip && \
+    #wget https://github.com/Trust-Code/trustcode-addons/archive/15.0.zip -O trustcode-addons.zip && \
+    #wget https://github.com/trust-code/odoo-themes/archive/15.0.zip -O odoo-themes.zip
 
-RUN unzip -q odoo.zip && rm odoo.zip && mv odoo-13.0 odoo && \
-    unzip -q odoo-brasil.zip && rm odoo-brasil.zip && mv odoo-brasil-13.0 odoo-brasil && \
-    unzip -q odoo-apps.zip && rm odoo-apps.zip && mv odoo-apps-13.0 odoo-apps && \
-    unzip -q server-ux.zip && rm server-ux.zip && mv server-ux-13.0 server-ux && \
-    unzip -q reporting-engine.zip && rm reporting-engine.zip && mv reporting-engine-13.0 reporting-engine && \
-    unzip -q account-financial-reporting.zip && rm account-financial-reporting.zip && mv account-financial-reporting-13.0 account-financial-reporting && \
-    unzip -q mis-builder.zip && rm mis-builder.zip && mv mis-builder-13.0 mis-builder && \
-    unzip -q helpdesk.zip && rm helpdesk.zip && mv helpdesk-13.0 helpdesk && \
-    unzip -q odoo-themes && rm odoo-themes.zip && mv odoo-themes-13.0 odoo-themes && \
-    unzip -q trustcode-addons.zip && rm trustcode-addons.zip && mv trustcode-addons-13.0 trustcode-addons && \
+RUN unzip -q odoo.zip && rm odoo.zip && mv odoo-15.0 odoo && \
+    unzip -q odoo-brasil.zip && rm odoo-brasil.zip && mv odoo-brasil-15.0 odoo-brasil && \
+    unzip -q odoo-apps.zip && rm odoo-apps.zip && mv odoo-apps-15.0 odoo-apps && \
+    #unzip -q server-ux.zip && rm server-ux.zip && mv server-ux-15.0 server-ux && \
+    #unzip -q reporting-engine.zip && rm reporting-engine.zip && mv reporting-engine-15.0 reporting-engine && \
+    #unzip -q account-financial-reporting.zip && rm account-financial-reporting.zip && mv account-financial-reporting-13.0 account-financial-reporting && \
+    #unzip -q mis-builder.zip && rm mis-builder.zip && mv mis-builder-15.0 mis-builder && \
+    #unzip -q helpdesk.zip && rm helpdesk.zip && mv helpdesk-15.0 helpdesk && \
+    #unzip -q odoo-themes && rm odoo-themes.zip && mv odoo-themes-15.0 odoo-themes && \
+    #unzip -q trustcode-addons.zip && rm trustcode-addons.zip && mv trustcode-addons-15.0 trustcode-addons && \
     cd odoo && find . -name "*.po" -not -name "pt_BR.po" -not -name "pt.po"  -type f -delete && \
     find . -path "*l10n_*" -delete && \
     rm -R debian && rm -R doc && rm -R setup && cd ..
@@ -67,6 +67,7 @@ ENV TIME_REAL=720
 ENV DBFILTER=.*
 ENV DEBUGPY_PORT=8888
 ENV MAX_CRON_THREADS=0
+ENV PRIVATE_APPS=False
 
 EXPOSE $PORT $LONGPOLLING_PORT $DEBUGPY_PORT
 VOLUME ["/opt/", "/etc/odoo"]
