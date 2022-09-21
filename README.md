@@ -15,7 +15,7 @@ See [Docker Postgres](https://hub.docker.com/_/postgres/) for more informations.
 
 An easy way to use this image is running the following command:
 
-> docker run --name odoo -d --net host -e PG_USER=odoo -e PG_PASSWORD=odoo -p 8069:8069 -p 8072:8072 code137oficial/docker-odoo:13.0
+> docker run --name odoo -d --net host -e PG_USER=odoo -e PG_PASSWORD=odoo -p 8069:8069 -p 8072:8072 code137oficial/docker-odoo:14.0
 
 
 ### List of available parameters
