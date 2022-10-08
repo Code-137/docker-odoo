@@ -15,7 +15,7 @@ See [Docker Postgres](https://hub.docker.com/_/postgres/) for more informations.
 
 An easy way to use this image is running the following command:
 
-> docker run --name odoo -d --net host -e PG_USER=odoo -e PG_PASSWORD=odoo -p 8069:8069 -p 8072:8072 code137oficial/docker-odoo:13.0
+> docker run --name odoo -d --net host -e PG_USER=odoo -e PG_PASSWORD=odoo -p 8069:8069 -p 8072:8072 code137oficial/docker-odoo:15.0
 
 
 ### List of available parameters
@@ -47,7 +47,7 @@ Each parameter can be added to the command using the -e parameter_name as the fo
     -e LONGPOLLING_PORT=8052 \\  
     -p 8069:8069 \\  
     -p 8072:8072 \\  
-    code137oficial/docker-odoo:13.0
+    code137oficial/docker-odoo:15.0
 
 ## For Developers
 
@@ -63,7 +63,7 @@ Debuging using this container could be possible using the following command:
     -p 8069:8069 \\  
     -p 8072:8072 \\  
     -p 8888:8888 \\  
-    code137oficial/docker-odoo:13.0 \\  
+    code137oficial/docker-odoo:15.0 \\  
     python3 -m debugpy --listen 0.0.0.0:8888 /opt/odoo/odoo/odoo-bin -c /opt/odoo/odoo.conf
 
 ### Automated Tests
@@ -78,7 +78,7 @@ To run automated tests just use the following command:
     -p 8069:8069 \\  
     -p 8072:8072 \\  
     -p 8888:8888 \\  
-    code137oficial/docker-odoo:13.0 \\  
+    code137oficial/docker-odoo:15.0 \\  
     python3 -m coverage run /opt/odoo/odoo/odoo-bin -c /opt/odoo/odoo.conf --test-enable --log-level='test' --xmlrpc-port=8069 -d unit_tests --init=sale --stop-after-init
 
 This command will be run the tests for the sale app. To run other apps tests, insert the app name after init, and if you want to run tests to more than one apps, put the app names separated to coma.
